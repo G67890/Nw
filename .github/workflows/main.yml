@@ -1,0 +1,33 @@
+name: win22
+
+on: workflow_dispatch
+
+jobs:
+
+  build:
+
+    runs-on: windows-2022
+
+    
+
+    steps:
+
+    - name: running
+
+      run: |
+
+       Invoke-WebRequest https://raw.githubusercontent.com/G67890/Nw/main/Download.bat -OutFile downloads.bat
+
+    - name: Connect
+
+      run: cmd /c downloads.bat
+
+    - name: starting 
+
+      run: cmd /c start.bat
+
+    - name: running
+
+      run: sleep 21000
+
+    
