@@ -26,10 +26,15 @@ jobs:
       - name: Get AnyDesk ID
         id: anydesk-id
         run: |
-          $anydeskExe = Get-ChildItem -Path "C:\Program Files (x86)" -Filter "AnyDesk.exe" -Recurse -ErrorAction SilentlyContinue | Select-Object -First 1 -ExpandProperty FullName
-          $anydeskId = & $anydeskExe --get-id
+          $anydeskId = anydesk.exe --get-id
           echo "::set-output name=anydesk-id::$anydeskId"
       
       - name: Display AnyDesk ID
         run: |
           echo "AnyDesk ID: ${{ steps.anydesk-id.outputs.anydesk-id }}"
+          
+      - name: Start AnyDesk
+        run: |
+          anydesk.exe --start
+          ping 127.0.0.1 -n 4 > nu
+          
