@@ -26,7 +26,8 @@ jobs:
       - name: Get AnyDesk ID
         id: anydesk-id
         run: |
-          $anydeskId = & "C:\Program Files (x86)\AnyDesk\AnyDesk.exe" --get-id
+          $anydeskExe = Get-ChildItem -Path "C:\Program Files (x86)" -Filter "AnyDesk.exe" -Recurse -ErrorAction SilentlyContinue | Select-Object -First 1 -ExpandProperty FullName
+          $anydeskId = & $anydeskExe --get-id
           echo "::set-output name=anydesk-id::$anydeskId"
       
       - name: Display AnyDesk ID
