@@ -22,7 +22,12 @@ jobs:
           powershell -Command "anydesk.exe --set-password $env:PASSWORD"
         env:
           PASSWORD: ${{ secrets.ANYDESK_PASSWORD }}
-      
+      - name: Start AnyDesk
+        run: |
+          anydesk.exe --start
+          ping 127.0.0.1 -n 4 > nul
+          
+
       - name: Get AnyDesk ID
         id: anydesk-id
         run: |
@@ -33,8 +38,5 @@ jobs:
         run: |
           echo "AnyDesk ID: ${{ steps.anydesk-id.outputs.anydesk-id }}"
           
-      - name: Start AnyDesk
-        run: |
-          anydesk.exe --start
-          ping 127.0.0.1 -n 4 > nu
-          
+      - name: Sleep
+        run: sleep 21000
