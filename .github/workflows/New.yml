@@ -1,0 +1,34 @@
+name: Set AnyDesk Password and Get ID
+
+on:
+  push:
+    branches:
+      - main
+
+jobs:
+  set-password-and-get-id:
+    runs-on: windows-latest
+    
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v2
+      
+      - name: Install AnyDesk
+        run: |
+          powershell -Command "choco install anydesk -y"
+      
+      - name: Set AnyDesk Password
+        run: |
+          powershell -Command "anydesk.exe --set-password $env:PASSWORD"
+        env:
+          PASSWORD: ${{ secrets.ANYDESK_PASSWORD }}
+      
+      - name: Get AnyDesk ID
+        id: anydesk-id
+        run: |
+          $anydeskId = & "C:\Program Files (x86)\AnyDesk\AnyDesk.exe" --get-id
+          echo "::set-output name=anydesk-id::$anydeskId"
+      
+      - name: Display AnyDesk ID
+        run: |
+          echo "AnyDesk ID: ${{ steps.anydesk-id.outputs.anydesk-id }}"
