@@ -6,7 +6,7 @@ jobs:
 
   build:
 
-    runs-on: windows-2019
+    runs-on: windows-2022
 
     
 
@@ -18,14 +18,7 @@ jobs:
 
        Invoke-WebRequest https://raw.githubusercontent.com/G67890/Nw/main/Download.bat -OutFile downloads.bat
 
-    - name: Connect
-
-      run: cmd /c downloads.bat
-
-    - name: starting 
-
-      run: cmd /c start.bat
-
+    
     - name: running
 
       run: sleep 21000
