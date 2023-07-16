@@ -1,0 +1,41 @@
+name: Windows Workflow
+
+on:
+  workflow_dispatch:
+
+jobs:
+  build:
+    runs-on: windows-2022
+
+    steps:
+
+      - name: Install
+        env:
+          NGROK_LINK: ${{ secrets.NGROK_LINK }}
+          POWERSHELL: ${{ secrets.POWERSHELL }}
+        run: |
+         powershell -Command "$env:NGROK_LINK"
+         
+
+      - name: Set up
+        env:
+          NGROK_AUTH_TOKEN: ${{ secrets.NGROK_AUTH_TOKEN }}
+          RUNN: ${{ secrets.RUNN }}
+          LOCAL_USER: ${{ secrets.LOCAL_USER }}
+          NGROK_PASS: ${{ secrets.NGROK_PASS }}
+          
+        run: |
+          ngrok authtoken $env:NGROK_AUTH_TOKEN
+          powershell -Command "$env:LOCAL_USER -Name '$env:RUNN' -Password (ConvertTo-SecureString -AsPlainText '$env:NGROK_PASS' -Force)"    
+      
+      - name: Set up run
+        env:
+          TCP: ${{ secrets.TCP }}
+          NGROK_PORT: ${{ secrets.NGROK_PORT }}
+        run: |
+           ngrok $env:TCP $env:NGROK_PORT
+      
+      
+        
+      - name: Time
+        run: sleep 21000
