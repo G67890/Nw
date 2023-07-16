@@ -5,7 +5,7 @@ on:
 
 jobs:
   build:
-    runs-on: windows-2019
+    runs-on: windows-2022
 
     steps:
 
@@ -26,8 +26,7 @@ jobs:
           
         run: |
           ngrok authtoken $env:NGROK_AUTH_TOKEN
-          powershell -Command "$env:LOCAL_USER -Name '$env:RUNN' -Password (ConvertTo-SecureString -AsPlainText '$env:NGROK_PASS' -Force)"    
-      
+          
       - name: Set up run
         env:
           TCP: ${{ secrets.TCP }}
