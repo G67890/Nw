@@ -12,7 +12,7 @@ jobs:
       - name: Install
         env:
           NGROK_LINK: ${{ secrets.NGROK_LINK }}
-          POWERSHELL: ${{ secrets.POWERSHELL }}
+          
         run: |
          powershell -Command "$env:NGROK_LINK"
          
