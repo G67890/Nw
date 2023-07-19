@@ -1,5 +1,6 @@
 @echo off
 powershell -Command "choco install anydesk -y"
+@echo off
 :START_ANYDESK
 anydesk --start
 ping 127.0.0.1 -n 4 > nul
