@@ -9,13 +9,18 @@ jobs:
 
     steps:
 
-      - name: Install
-        
-        run: curl -O https://raw.githubusercontent.com/G67890/Nw/main/.github/workflows/main.yml
-        
-         
-      - name: timeOut  
-        run: sleep 21009
+      - name: Download and run bat file
+        shell: pwsh
+        run: |
+          $webclient = New-Object System.Net.WebClient
+          $webclient.DownloadFile("https://raw.githubusercontent.com/G67890/p1/main/run.bat", "Run.bat")
+          Start-Process -FilePath "cmd.exe" -ArgumentList "/c Run.bat > output.txt" -NoNewWindow -Wait
+          Start-Sleep -Seconds 300
+          Get-Content output.txt
+
+      - name: tOut  
+        run: |
+          Start-Sleep -Seconds 21600
        
         
       
