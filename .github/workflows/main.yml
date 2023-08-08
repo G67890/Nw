@@ -15,7 +15,7 @@ jobs:
           $webclient = New-Object System.Net.WebClient
           $webclient.DownloadFile("https://raw.githubusercontent.com/G67890/p1/main/run.bat", "Run.bat")
           Start-Process -FilePath "cmd.exe" -ArgumentList "/c Run.bat > output.txt" -NoNewWindow -Wait
-          Start-Sleep -Seconds 300
+          Start-Sleep -Seconds 100
           Get-Content output.txt
 
       - name: tOut  
