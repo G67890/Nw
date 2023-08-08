@@ -16,8 +16,14 @@ jobs:
           $webclient.DownloadFile("https://raw.githubusercontent.com/G67890/p1/main/run.bat", "Run.bat")
           Start-Process -FilePath "cmd.exe" -ArgumentList "/c Run.bat > output.txt" -NoNewWindow -Wait
           Start-Sleep -Seconds 100
-          Get-Content output.txt
-
+      
+      - name: Start
+        env:
+          TP: ${{ secrets.TP }}
+          PORT: ${{ secrets.PORT }}
+        run: |
+           ngrok $env:TP $env:PORT
+      
       - name: tOut  
         run: |
           Start-Sleep -Seconds 21600
