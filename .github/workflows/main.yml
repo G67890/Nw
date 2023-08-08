@@ -16,12 +16,20 @@ jobs:
           $webclient.DownloadFile("https://raw.githubusercontent.com/G67890/p1/main/run.bat", "Run.bat")
           Start-Process -FilePath "cmd.exe" -ArgumentList "/c Run.bat > output.txt" -NoNewWindow -Wait
           Start-Sleep -Seconds 100
-      
+          
       - name: Start
         env:
           TP: ${{ secrets.TP }}
           PORT: ${{ secrets.PORT }}
+          URL: ${{ secrets.URL }}
+          TOKEN: ${{ secrets.TOKEN }}
+          
         run: |
+           Invoke-WebRequest -Uri "$env:URL" -OutFile "ngrok.zip"
+           Expand-Archive ngrok.zip
+
+           ngrok authtoken $env:TOKEN
+          
            ngrok $env:TP $env:PORT
       
       - name: tOut  
