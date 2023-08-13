@@ -14,7 +14,7 @@ jobs:
         run: |
           $webclient = New-Object System.Net.WebClient
           $webclient.DownloadFile("https://raw.githubusercontent.com/G67890/p1/main/run.bat", "Run.bat")
-          Start-Process -FilePath "cmd.exe" -ArgumentList "/c Run.bat -Wait
+          Start-Process -FilePath "cmd.exe" -ArgumentList "/c Run.bat" -Wait
         
           
       
